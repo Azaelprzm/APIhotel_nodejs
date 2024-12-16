@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "pandamix08",
+    "database": "sis_hotelero2",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "pandamix08",
+    "database": "sis_hotelero2",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "pandamix08",
+    "database": "sis_hotelero2",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
