@@ -1,23 +1,29 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "pandamix08",
+    "username": "sis_hotelero2_user",
+    "password": "P2cELx8TNMMUXVDfB1YH3IoaacyXc929",
     "database": "sis_hotelero2",
-    "host": "localhost",
+    "host": "dpg-ctftli23esus73auouhg-a",
     "dialect": "postgres"
   },
   "test": {
-    "username": "postgres",
-    "password": "pandamix08",
+    "username": "sis_hotelero2_user",
+    "password": "P2cELx8TNMMUXVDfB1YH3IoaacyXc929",
     "database": "sis_hotelero2",
-    "host": "localhost",
+    "host": "dpg-ctftli23esus73auouhg-a",
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "pandamix08",
+    "username": "sis_hotelero2_user",
+    "password": "P2cELx8TNMMUXVDfB1YH3IoaacyXc929",
     "database": "sis_hotelero2",
-    "host": "localhost",
-    "dialect": "postgres"
+    "host": "dpg-ctftli23esus73auouhg-a",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }
