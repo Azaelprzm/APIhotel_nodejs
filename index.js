@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const sequelize = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const hotelRoutes = require('./routes/hotelRoutes');
@@ -13,9 +14,11 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5003;
 
+// Configura CORS
+app.use(cors());
+
 // Middleware para mostrar peticiones en la consola
 app.use(morgan(':method :url :status :response-time ms - :res[content-length]'));
-
 
 // Middlewares
 app.use(express.json());
