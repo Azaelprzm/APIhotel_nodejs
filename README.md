@@ -80,4 +80,8 @@ GitHub Actions verifica sintaxis y pruebas en Node.js 22 y 24. Las 12 pruebas cu
 
 ## Estado del proyecto
 
-La implementación es educativa y no está lista para procesar datos personales o pagos reales. Se retiraron los secretos y dependencias del seguimiento, se corrigió el identificador JWT y se actualizaron dependencias compatibles. La API y PostgreSQL están detenidos según su propietario; no se requiere un despliegue activo para conservar el proyecto como portafolio. Persisten limitaciones funcionales y avisos de auditoría descritos en la documentación.
+Desarrollé esta API como parte de un proyecto escolar para aplicar conocimientos de desarrollo backend, autenticación y manejo de bases de datos. Actualmente la conservo como parte de mi portafolio, junto con su aplicación cliente en Flutter.
+
+El servicio de la API y la base de datos PostgreSQL en Render están detenidos, por lo que no hay un despliegue público activo. El proyecto puede ejecutarse localmente siguiendo las instrucciones de este repositorio.
+
+Su alcance es académico: permite explorar un sistema de gestión hotelera, pero no está destinado a procesar datos personales ni pagos reales en producción. Las consideraciones técnicas y de seguridad se encuentran en la documentación de [arquitectura](docs/ARQUITECTURA.md) y [seguridad](docs/SEGURIDAD.md).
