@@ -1,3 +1,6 @@
+const { validateEnvironment } = require('./config/environment');
+validateEnvironment();
+
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');

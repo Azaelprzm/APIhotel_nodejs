@@ -2,7 +2,7 @@
 
 API REST académica desarrollada con Node.js, Express, Sequelize y PostgreSQL para administrar hoteles, habitaciones, clientes, reservas y pagos. Es el backend utilizado por [flutterHotel](https://github.com/Azaelprzm/flutterHotel).
 
-> **Aviso de seguridad:** este repositorio contiene credenciales versionadas en `.env` y `config/config.json`. Deben considerarse comprometidas y rotarse antes de utilizar el servicio con datos reales. Esta actualización documenta el proyecto; no elimina secretos del historial ni corrige el backend.
+> **Aviso de seguridad:** las credenciales publicadas anteriormente en `.env` y `config/config.json` siguen accesibles en el historial Git. Este cambio las retira de la versión actual, pero deben rotarse en el proveedor antes de desplegar o utilizar datos reales. No se reescribió el historial.
 
 ## Documentación
 
@@ -20,7 +20,7 @@ API REST académica desarrollada con Node.js, Express, Sequelize y PostgreSQL pa
 
 ## Ejecutar localmente
 
-Necesitas Node.js con npm y una base de datos PostgreSQL existente. El proyecto no declara una versión mínima de Node.js ni una matriz de versiones verificadas.
+Necesitas Node.js 22 o superior con npm y una base de datos PostgreSQL existente. `.nvmrc` selecciona Node.js 24; la integración continua comprueba Node.js 22 y 24.
 
 ```bash
 git clone https://github.com/Azaelprzm/APIhotel_nodejs.git
@@ -28,7 +28,7 @@ cd APIhotel_nodejs
 npm ci
 ```
 
-**No utilices el `.env` incluido en GitHub.** Reemplaza su contenido localmente por el de `.env.example` y configura una base de datos de desarrollo propia. Nunca ejecutes las pruebas manuales contra producción.
+Crea un `.env` local a partir de `.env.example` y configura una base de datos de desarrollo propia. Si conservas una copia anterior, reemplaza las credenciales expuestas por otras nuevas. `.env` y `node_modules/` ahora se excluyen de Git. Nunca ejecutes las pruebas manuales contra producción.
 
 | Variable | Uso |
 | --- | --- |
@@ -37,14 +37,14 @@ npm ci
 | `DB_PASSWORD` | Contraseña de ese usuario |
 | `DB_HOST` | Host de PostgreSQL |
 | `DB_PORT` | Puerto de PostgreSQL, normalmente 5432 |
-| `JWT_SECRET` | Clave privada y aleatoria para firmar JWT |
+| `JWT_SECRET` | Clave privada aleatoria de al menos 32 caracteres; no se acepta el marcador de la plantilla |
 | `PORT` | Puerto HTTP; por defecto 5003 |
 
 ```bash
 npm start
 ```
 
-El comando ejecuta `nodemon index.js`. Primero se sincronizan los modelos con `sequelize.sync({ force: false })`; el servidor solo empieza a escuchar si esa sincronización finaliza correctamente. No crea la base de datos PostgreSQL, ni ejecuta las migraciones de `migrations/`.
+El comando ejecuta `node index.js`; usa `npm run dev` para desarrollo con nodemon. El arranque valida las variables obligatorias, puertos y clave JWT antes de conectarse. Primero se sincronizan los modelos con `sequelize.sync({ force: false })`; el servidor solo empieza a escuchar si esa sincronización finaliza correctamente. No crea la base de datos PostgreSQL, ni ejecuta las migraciones de `migrations/`.
 
 Comprobación local:
 
@@ -68,14 +68,16 @@ Consulta [la referencia](docs/API.md) para conocer los campos, respuestas y erro
 
 ## Comprobaciones disponibles
 
-No hay scripts de pruebas, lint ni CI configurados. Una comprobación de sintaxis sin iniciar el servidor es:
+Las siguientes comprobaciones no inician el servidor ni ejecutan peticiones a producción:
 
 ```bash
-node --check index.js
+npm run check
+npm test
+npm audit
 ```
 
-Los ejemplos de la referencia son ilustrativos; no representan pruebas de integración ejecutadas contra una base de datos.
+GitHub Actions verifica sintaxis y pruebas en Node.js 22 y 24. Las 12 pruebas cubren el middleware JWT, validación de entorno e importación de modelos sin conexión PostgreSQL. No son pruebas de integración de CRUD. Los ejemplos de la referencia son ilustrativos.
 
 ## Estado del proyecto
 
-La implementación es educativa y no está lista para procesar datos personales o pagos reales. Incluye dependencias versionadas en `node_modules/`, una configuración antigua para Sequelize CLI y limitaciones funcionales descritas en la documentación. Las mejoras de seguridad y funcionamiento deben hacerse en cambios separados de esta documentación.
+La implementación es educativa y no está lista para procesar datos personales o pagos reales. Se retiraron los secretos y dependencias del seguimiento actual, se corrigió el identificador JWT y se actualizaron dependencias compatibles. Persisten limitaciones funcionales, secretos históricos y avisos de auditoría descritos en la documentación.

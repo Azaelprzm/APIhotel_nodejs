@@ -24,7 +24,7 @@ Cliente Flutter / cliente HTTP
 | `models/` | Modelos y asociaciones Sequelize |
 | `migrations/` | Migraciones históricas, no ejecutadas por `npm start` |
 
-`models/index.js` es una plantilla de Sequelize CLI que espera modelos exportados como funciones. Los modelos actuales exportan instancias directamente; por eso no debe presentarse ese archivo como punto de entrada funcional. La aplicación importa cada modelo por separado.
+`models/index.js` exporta las instancias de modelos y la misma conexión usada por la aplicación. Se retiró la plantilla que esperaba funciones de fábrica. `config/config.js` reemplaza la configuración JSON con credenciales por variables del entorno; no se ha añadido ni probado un flujo de Sequelize CLI para migraciones.
 
 ## Entidades
 
@@ -56,6 +56,6 @@ Los importes se almacenan como `FLOAT`, no como decimales exactos. La declaraci�
 - No hay validación completa de fechas inválidas, tipos, campos vacíos o montos negativos en reservas.
 - No se comprueba que la habitación pertenezca al hotel enviado ni que no tenga reservas superpuestas.
 - No hay paginación, roles ni aislamiento de datos por usuario.
-- La autenticación firma `userId`, pero el middleware lee `decoded.id`: el campo `req.userId` queda indefinido. El token sí se verifica, pero `/api/test` no devuelve el identificador esperado.
+- La discrepancia histórica `userId`/`id` del JWT fue corregida; el middleware usa y valida `userId`.
 - Las migraciones y la sincronización automática son mecanismos distintos; no se ofrece una secuencia CLI de migración como si estuviera preparada y probada.
 - No se ha validado el despliegue, la conectividad PostgreSQL, TLS ni el comportamiento en producción.

@@ -10,7 +10,8 @@ const verifyToken = (req, res, next) => {
   }
   
   // Extraer el token del encabezado, eliminando la palabra "Bearer "
-  const token = authHeader.split(' ')[1];
+  const match = /^Bearer\s+(\S+)$/i.exec(authHeader);
+  const token = match && match[1];
   
   // Comprobar si el token está presente
   if (!token) {
@@ -19,15 +20,17 @@ const verifyToken = (req, res, next) => {
 
   try {
     // Verificar y decodificar el token con la clave secreta
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] });
     
     // Almacenar el ID del usuario decodificado en la solicitud para usarlo más adelante
-    req.userId = decoded.id;
+    if (!decoded || !Number.isInteger(decoded.userId) || decoded.userId <= 0) {
+      return res.status(401).json({ message: 'Token inválido o expirado' });
+    }
+    req.userId = decoded.userId;
     
     // Continuar al siguiente middleware o controlador de la ruta
     next();
   } catch (error) {
-    console.error('Error al verificar el token:', error.message);
     return res.status(401).json({ message: 'Token inválido o expirado' });
   }
 };

@@ -68,7 +68,7 @@ Devuelve 200 con un arreglo de objetos `{id, nombre, email}`. No devuelve passwo
 
 ### `GET /test` — protegido
 
-La implementación intenta devolver `{message: "Acceso autorizado", userId: ...}`. Debido a la discrepancia entre `userId` en el JWT e `id` en el middleware, un token generado por login deja el identificador indefinido y JSON lo omite.
+Devuelve `{"message":"Acceso autorizado","userId":1}` para un JWT válido emitido por login. El identificador depende del usuario. El middleware comprueba el formato Bearer, firma HS256, expiración e identificador entero positivo.
 
 ## CRUD de hoteles, habitaciones y clientes
 
